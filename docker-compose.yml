@@ -1,0 +1,9 @@
+services:
+  megacmd:
+    image: bheemboy/megacmd
+    container_name: megacmd
+    restart: always
+    volumes:
+      - /etc/machine-id:/etc/machine-id:ro
+      - /mnt/tank/docker/config/megaCmd:/root/.megaCmd
+      - /mnt/tank/scanner:/root/MEGA/Scanner
