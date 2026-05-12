@@ -10,6 +10,6 @@ services:
     restart: always
     volumes:
       - /etc/machine-id:/etc/machine-id:ro
-      - /mnt/tank/docker/config/megaCmd:/root/.megaCmd
+      - /mnt/tank/docker/config/megacmd:/root/.megaCmd
       - /mnt/tank/scanner:/root/MEGA/Scanner
 ```
