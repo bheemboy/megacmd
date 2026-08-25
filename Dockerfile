@@ -1,7 +1,7 @@
 # docker build -t bheemboy/megacmd:latest -t bheemboy/megacmd:$(Get-Date -Format "yyyy.MM.dd") .
 # docker push --all-tags bheemboy/megacmd
 
-FROM debian:12-slim
+FROM debian:13-slim
 
 RUN apt-get update \
   # Upgrade
@@ -10,8 +10,8 @@ RUN apt-get update \
   # Install dependencies
   && apt-get install wget -y \
   # Download & Install MegaCMD
-  && wget https://mega.nz/linux/repo/Debian_12/amd64/megacmd-Debian_12_amd64.deb \
-  && (dpkg -i megacmd-Debian_12_amd64.deb || true) \
+  && wget https://mega.nz/linux/repo/Debian_13/amd64/megacmd-Debian_13_amd64.deb \
+  && (dpkg -i megacmd-Debian_13_amd64.deb || true) \
   && apt-get install -f -y \
   # Cleanup
   && rm *.deb \
