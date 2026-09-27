@@ -8,10 +8,12 @@ A minimal Docker image that packages MEGAcmd (MEGA's CLI sync client) on `debian
 
 ## Commands
 
-Build and push (from the comment at the top of `Dockerfile`; the date tag uses PowerShell syntax, use `$(date +%Y.%m.%d)` on Linux):
+Build and push (from the comment at the top of `Dockerfile`). Images are tagged with the MEGAcmd package version read from MEGA's apt repo, so an existing tag on Docker Hub means no rebuild is needed:
 
 ```
-docker build -t bheemboy/megacmd:latest -t bheemboy/megacmd:$(date +%Y.%m.%d) .
+VERSION=$(curl -s https://mega.nz/linux/repo/Debian_13/Packages | awk '/^Package:/{p=$2} /^Version:/{v=$2} /^Architecture:/{if(p=="megacmd"&&$2=="amd64"){print v; exit}}')
+docker manifest inspect bheemboy/megacmd:$VERSION >/dev/null 2>&1 && echo "$VERSION already published"
+docker build -t bheemboy/megacmd:latest -t bheemboy/megacmd:$VERSION .
 docker push --all-tags bheemboy/megacmd
 ```
 
